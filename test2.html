@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单数据绑定</title>
+</head>
+<body>
+    <input type="text"  id="a" />
+    <span id="b"></span>
+</body>
+<script>
+    var obj={}
+    Object.defineProperty(obj, "hello",{
+            set:function (newVal){
+                document.getElementById("a").value=newVal
+                document.getElementById("b").innerHTML=newVal
+            }
+    })
+document.addEventListener("keyup",function(e){
+    obj.hello=e.target.value
+})
+</script>
+</html>

@@ -44,7 +44,7 @@
                         vm[name] = e.target.value;
                     });
 
-                    node.value = vm[name];//讲实例中的data数据赋值给节点
+                    node.value = vm[name];//实例中的data数据赋值给节点
                     node.removeAttribute('v-model');
                 }
             }
@@ -150,6 +150,10 @@
             d: '123'
         }
     })
+//vue实例化之后，将根元素下的所有元素通过递归循环遍历，添加到虚拟dom对象里面，这个过程也把data里面的数据赋值到指定的dom节点下，节点分为文本节点“{{}}”(赋值方式）和元素节点v-text，v-model(赋值方式)
+//遍历完根节点下所有元素就会把虚拟dom对象通过appendChild统一添加到根节点
+
+
 
 </script>
 
