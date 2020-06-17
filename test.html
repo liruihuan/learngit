@@ -130,9 +130,11 @@
             switch (this.node.nodeType) {
                 case 1:
                     this.node.value = this.value;
+                    console.log(1)
                     break;
                 case 3:
                     this.node.nodeValue = this.value;
+                    console.log(3)
                     break;
                 default: break;
             }
