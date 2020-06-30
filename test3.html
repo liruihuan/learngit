@@ -11,61 +11,61 @@
     <div id="app">
 
         <input type="text" v-model="text" />
-        <span>   {{text}}</span>
-    
+        <span> {{text}}</span>
+
     </div>
     <script>
         function compile(node, vm) {
             var reg = /\{\{(.*)\}\}/;
-            if(node.nodeType===1){
-                var  attr=node.attributes;
-             
-                for(var i=0;i<attr.length;i++){
-                    console.log("k",attr[i].nodeName)
-                    if(attr[i].nodeName=="v-model"){
-                        var name=attr[i].nodeValue
-                        console.log("v",name)
-                        node.value=vm.data[name]
+            if (node.nodeType === 1) {
+                var attr = node.attributes;
+
+                for (var i = 0; i < attr.length; i++) {
+                    console.log("k", attr[i].nodeName)
+                    if (attr[i].nodeName == "v-model") {
+                        var name = attr[i].nodeValue
+                        console.log("v", name)
+                        node.value = vm.data[name]
                         node.removeAttribute("v-model")
                     }
                 }
             }
-         
-            if(node.nodeType===3){
-              
-                if(reg.test(node.nodeValue)){
-                    var  name= RegExp.$1
-                    name=name.trim()
-                 
-                    node.nodeValue=vm.data[name]
+
+            if (node.nodeType === 3) {
+
+                if (reg.test(node.nodeValue)) {
+                    var name = RegExp.$1
+                    name = name.trim()
+
+                    node.nodeValue = vm.data[name]
                 }
             }
         }
-        function nodeContainer(node, vm,flag) {
-        var flag =flag||document.createDocumentFragment(); //创建一个虚拟的节点对象
+        function nodeContainer(node, vm, flag) {
+            var flag = flag || document.createDocumentFragment(); //创建一个虚拟的节点对象
 
-        var child;
-        while (child = node.firstChild) {
-            compile(child, vm);
-            flag.appendChild(child);
-            if (child.firstChild) {
-                nodeContainer(child, vm,flag);
+            var child;
+            while (child = node.firstChild) {
+                compile(child, vm);
+                flag.appendChild(child);
+                if (child.firstChild) {
+                    nodeContainer(child, vm, flag);
+                }
             }
+            return flag;
         }
-        return flag;
-    }
-    function Vue(options) {
-        this.data = options.data;
-        var id = options.el;
-        var dom = nodeContainer(document.getElementById(id), this);
-        document.getElementById(id).appendChild(dom);
-    }
-    var Demo = new Vue({
-        el: 'app',
-        data: {
-            text: 'HelloWorld',
+        function Vue(options) {
+            this.data = options.data;
+            var id = options.el;
+            var dom = nodeContainer(document.getElementById(id), this);
+            document.getElementById(id).appendChild(dom);
         }
-    })
+        var Demo = new Vue({
+            el: 'app',
+            data: {
+                text: 'HelloWorld',
+            }
+        })
     </script>
 </body>
 

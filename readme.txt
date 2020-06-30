@@ -3,7 +3,10 @@
 截取到的数据变化，从而通过订阅——发布者模式，触发Watcher（观察者）,从而改变虚拟dom的中的具体数据。
 最后，通过更新虚拟dom的元素值，从而改变最后渲染dom树的值，完成双向绑定
 
-
+Dep.global是在第一次new Watcher()的时候，进入update()方法，触发这里的get方法。
+这里非常的重要的一点！在此时new Watcher()只走到了this.update();方法，
+此刻没有触发Dep.global = null函数，所以值并没有清空，所以可以进到dep.add(Dep.global);方法里面去。
+而第二次后，由于清空了Dep的全局变量，所以不会触发add()方法。
 
 定义Vue对象，声明vue的data里面的属性值，准备初始化触发observe方法。
 在Observe定义过响应式方法Object.defineProperty()的属性，在初始化的时候，通过Watcher对象进行addDep的操作。即每定义一个vue的data的属性值，就添加到一个Watcher对象到订阅者里面去。

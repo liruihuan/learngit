@@ -15,7 +15,7 @@
 </body>
 <script>
     var obj = {};
-// document.createElement()
+    // document.createElement()
     function nodeContainer(node, vm, flag) {
         var flag = flag || document.createDocumentFragment(); //创建一个虚拟的节点对象
 
@@ -113,7 +113,6 @@
             })
         }
     }
-
 
     function Watcher(vm, node, name) {
         Dep.global = this;
