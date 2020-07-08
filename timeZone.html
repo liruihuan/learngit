@@ -9,38 +9,35 @@
 
 <body>
     <script type="text/javascript">
-        //得到标准时区的时间的函数
-        function getLocalTime(i) {
-            //参数i为时区值数字，比如北京为东八区则输进8,西5输入-5
-            if (typeof i !== 'number') return;
+
+        function getCurrentTime(t) {
+
+            if (typeof t !== 'number') return;    //t为时区参数
             const time = new Date();
-            //得到1970年一月一日到现在的秒数
             const len = time.getTime();
-            //本地时间与GMT时间的时间偏移差
-            const offset = time.getTimezoneOffset() * 60000;
-            //得到现在的格林尼治时间
-            const utcTime = len + offset;
+            const offset = time.getTimezoneOffset() * 60000; //本地时间与GMT时间差值
+            const utcTime = len + offset;  //格林尼治时间
 
 
-            const nd = new Date(utcTime + 3600000 * i);
-            const y = nd.getFullYear(),
-                mon = nd.getMonth() + 1,
-                d = nd.getDate(),
-                h = nd.getHours(),
-                m = nd.getMinutes(),
-                s = nd.getSeconds();
+            const date = new Date(utcTime + 3600000 * t); //格林尼治时间和当前时区差值
+            const y = date.getFullYear(),
+                mon = date.getMonth() + 1,
+                d = date.getDate(),
+                h = date.getHours(),
+                m = date.getMinutes(),
+                s = date.getSeconds();
 
             //不足两位补0
-            function Appendzero(obj) {
+            function addZero(obj) {
                 if (obj < 10) return "0" + "" + obj;
                 else return obj;
             }
-            const result = y + "-" + Appendzero(mon) + "-" + Appendzero(d) + " " + Appendzero(h) + ":" + Appendzero(m) + ":" + Appendzero(s);
+            const result = y + "-" + addZero(mon) + "-" + addZero(d) + " " + addZero(h) + ":" + addZero(m) + ":" + addZero(s);
             return result
 
         }
-        //8为东八区北京时间
-        console.log("%c北京时间", "color:red;font-weight:bold;", getLocalTime(8));
+        //8为东八区北京时间 东为正数 西为负数
+        console.log("%c北京时间", "color:red;font-weight:bold;", getCurrentTime(8));
 
     </script>
 </body>
