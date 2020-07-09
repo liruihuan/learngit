@@ -8,10 +8,10 @@
     <title>checkbox</title>
 </head>
 <style>
-    label {
+    .label {
 
         padding: 5px 10px;
-        border: 1px solid #CCC;
+        border: 1px solid rgb(104, 67, 67);
         border-radius: 5px;
         cursor: pointer;
 
@@ -21,9 +21,10 @@
 <body>
     <div id="app">
 
-        <label><input type="checkbox" v-model='isAllChecked' @click="checkAll" /> 全选</label>
+        <label class="label"><input type="checkbox" v-model='isAllChecked' @click="checkAll" /> 全选</label>
         <div v-for="(item,index) in tempData">
-            <input type="checkbox" :value="item.id" v-model="saveInfo" @change="singleCheck"> {{item.country}}
+            <label style="cursor: pointer;"> <input type="checkbox" :value="item.id" v-model="saveInfo"
+                    @change="singleCheck"> {{item.country}}</label>
         </div>
 
     </div>
