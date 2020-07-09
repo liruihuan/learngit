@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>checkbox</title>
+</head>
+<style>
+    label {
+
+        padding: 5px 10px;
+        border: 1px solid #CCC;
+        border-radius: 5px;
+        cursor: pointer;
+
+    }
+</style>
+
+<body>
+    <div id="app">
+
+        <label><input type="checkbox" v-model='isAllChecked' @click="checkAll" /> 全选</label>
+        <div v-for="(item,index) in tempData">
+            <input type="checkbox" :value="item.id" v-model="saveInfo" @change="singleCheck"> {{item.country}}
+        </div>
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: function () {
+            return {
+                isAllChecked: false,
+                saveInfo: [],//保存选择的数据,用于上传后台
+                tempData: [
+                    { id: 0, country: '中国' },
+                    { id: 1, country: '美国' },
+                    { id: 2, country: '俄罗斯' },
+                    { id: 3, country: '英国' },
+                    { id: 4, country: '法国' },
+
+                ],
+            }
+        },
+        methods: {
+            singleCheck() {
+                if (this.saveInfo.length == this.tempData.length) {
+                    this.isAllChecked = true;
+                } else {
+                    this.isAllChecked = false;
+                }
+                console.log(this.saveInfo)
+
+            },
+
+            checkAll() {
+                let that = this;
+                this.tempData.forEach(item => {
+                    if (!that.isAllChecked) {
+
+                        that.saveInfo.push(item.id)
+                    } else {
+
+                        that.saveInfo = [];
+                    }
+
+                });
+                console.log(this.saveInfo)
+
+            },
+
+        }
+    })
+
+</script>
+
+</html>
