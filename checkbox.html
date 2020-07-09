@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,16 +16,13 @@
 
     }
 </style>
-
 <body>
     <div id="app">
-
         <label class="label"><input type="checkbox" v-model='isAllChecked' @click="checkAll" /> 全选</label>
         <div v-for="(item,index) in tempData">
             <label style="cursor: pointer;"> <input type="checkbox" :value="item.id" v-model="saveInfo"
                     @change="singleCheck"> {{item.country}}</label>
         </div>
-
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -78,5 +74,4 @@
     })
 
 </script>
-
 </html>
