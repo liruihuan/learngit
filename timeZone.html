@@ -12,7 +12,9 @@
 
         function getCurrentTime(t) {
 
-            if (typeof t !== 'number') return;    //t为时区参数
+            //t为时区参数  默认东八区北京时间
+            if (!t) t = 8;
+
             const time = new Date();
             const len = time.getTime();
             const offset = time.getTimezoneOffset() * 60000; //本地时间与GMT时间差值
@@ -36,8 +38,11 @@
             return result
 
         }
-        //8为东八区北京时间 东为正数 西为负数
-        console.log("%c北京时间", "color:red;font-weight:bold;", getCurrentTime(8));
+        //8为东八区北京时间 东区时区1~12 西区时区-1~-12
+        console.log("%c北京时间", "color:red;font-weight:bold;", getCurrentTime());
+        console.log("%c东九区-东京时间" ,"color:green;font-weight:bold;", getCurrentTime(9));
+        console.log("%c西九区-阿拉斯加时间" ,"color:blue;font-weight:bold;", getCurrentTime(-9));
+       
 
     </script>
 </body>
