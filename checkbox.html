@@ -16,10 +16,13 @@
         cursor: pointer;
 
     }
+    [v-cloak]{
+        display:none !important;
+    }
 </style>
 
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
         <label class="label"><input type="checkbox" v-model='isAllChecked' @click="checkAll" /> 全选</label>
         <div v-for="(item,index) in tempData">
             <label style="cursor: pointer;"> <input type="checkbox" :value="item" v-model="saveInfo"
