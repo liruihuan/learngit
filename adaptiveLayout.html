@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>响应式布局</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./js/auto-layout.js"></script>
+    <!-- <script src="./js/convention-rem.js"></script>  -->
+
+</head>
+
+<body style="font-size: 12px;">
+    <div class="nav">
+        <ul>
+            <li>
+                <a href="#" class="actived">首页</a>
+            </li>
+            <li>
+                <a href="#">相机</a>
+            </li>
+            <li>
+                <a href="#">软件</a>
+            </li>
+            <li>
+                <a href="#">解决方案</a>
+            </li>
+            <li>
+                <a href="#">关于我们</a>
+            </li>
+        </ul>
+        <div class="top-mean">
+            <span class="mean-top"></span>
+            <span class="mean-middle"></span>
+            <span class="mean-bottom"></span>
+        </div>
+    </div>
+    <div class="content">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="levitate">
+
+        </div>
+    </div>
+    <div class="banner-bottom"></div>
+
+</body>
+
+<script>
+    $(function () {
+        $(".nav ul li").click(function () {//导航点击
+            $(".nav ul li a").removeClass("actived");
+            $(this).children("a").addClass("actived");
+        });
+        $(".top-mean").click(function () {//显示或隐藏下方导航列表
+
+            $(this).toggleClass("active");
+            $(".nav ul").toggleClass("show");
+
+        });
+      
+        // 获取div距离窗口的距离
+        const f = $(".levitate").offset().top;
+        $(window).scroll(function () {
+            $(".levitate").animate(
+                {
+                    top: $(window).scrollTop() + f
+                },
+                {
+                    queue: false, duration: 1000
+                })
+        });
+
+
+
+
+    });
+</script>
+
+</html>
