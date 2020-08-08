@@ -6,6 +6,7 @@
   margin-top: 78px;
   overflow: hidden;
   background: url(../images/bg.jpg) repeat;
+  background-size: auto auto;
 }
 
 .content .box1 {

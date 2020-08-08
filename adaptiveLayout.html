@@ -11,7 +11,7 @@
 
 </head>
 
-<body style="font-size: 12px;">
+<body>
     <div class="nav">
         <ul>
             <li>
@@ -30,10 +30,10 @@
                 <a href="#">关于我们</a>
             </li>
         </ul>
-        <div class="top-mean">
-            <span class="mean-top"></span>
-            <span class="mean-middle"></span>
-            <span class="mean-bottom"></span>
+        <div class="menu-btn">
+            <span class="btn-top"></span>
+            <span class="btn-middle"></span>
+            <span class="btn-bottom"></span>
         </div>
     </div>
     <div class="content">
@@ -53,7 +53,7 @@
             $(".nav ul li a").removeClass("actived");
             $(this).children("a").addClass("actived");
         });
-        $(".top-mean").click(function () {//显示或隐藏下方导航列表
+        $(".menu-btn").click(function () {//显示或隐藏下方导航列表
 
             $(this).toggleClass("active");
             $(".nav ul").toggleClass("show");
