@@ -1,33 +1,36 @@
 //定义一个变量和一个函数
- 
-$baseFontSize: 75;//基于视觉稿横屏尺寸/100得出的基准font-siz
 
-@function px2rem( $px) { 
-    @return  $px / $baseFontSize * 1rem;
+$baseFontSize: 75; //基于视觉稿横屏尺寸/100得出的基准font-siz
+
+@function px2rem($px) {
+    @return $px / $baseFontSize * 1rem;
 }
 
-.content{
-    width:100%;
-    height:2000px;
+.content {
+    width: 100%;
+    height: 2000px;
     background-color: #44a8f2;
     position: relative;
     margin-top: 78px;
     overflow: hidden;
     background: url(../images/bg.jpg) repeat;
     background-size: auto auto;
-    .box1{
-        width:100px;
+
+    .box1 {
+        width: 100px;
         height: 100px;
         background-color: aquamarine;
     }
-    .box2{
-        width:px2rem(100);
+
+    .box2 {
+        width: px2rem(100);
         height: px2rem(100);
         background-color: cyan;
     }
-    .levitate{
+
+    .levitate {
         display: block;
-        width:px2rem(150);
+        width: px2rem(150);
         height: px2rem(150);
         background: url("../images/pig.png") no-repeat;
         position: absolute;
@@ -36,19 +39,29 @@ $baseFontSize: 75;//基于视觉稿横屏尺寸/100得出的基准font-siz
     }
 
 }
-@keyframes changeY{
-    0%{-webkit-transform:translateY(0px);}
-    50%{-webkit-transform:translateY(-20px);}
-    100%{-webkit-transform:translateY(0px);}
+
+@keyframes changeY {
+    0% {
+        -webkit-transform: translateY(0px);
+    }
+
+    50% {
+        -webkit-transform: translateY(-20px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0px);
+    }
 }
-.banner-bottom{
+
+.banner-bottom {
     display: block;
-    animation:changeY 2s ease-in-out infinite;
-    transform:translateY(0);
+    animation: changeY 2s ease-in-out infinite;
+    transform: translateY(0);
     position: fixed;
     bottom: 15px;
     left: 50%;
-    width:px2rem(150);
+    width: px2rem(150);
     height: px2rem(150);
     margin-left: px2rem(-75);
     background: url(../images/icon.gif) no-repeat;

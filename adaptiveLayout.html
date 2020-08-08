@@ -49,27 +49,26 @@
 
 <script>
     $(function () {
-        $(".nav ul li").click(function () {//导航点击
+        $(".nav ul li").click(function () { //导航点击
             $(".nav ul li a").removeClass("actived");
             $(this).children("a").addClass("actived");
         });
-        $(".menu-btn").click(function () {//显示或隐藏下方导航列表
+        $(".menu-btn").click(function () { //显示或隐藏下方导航列表
 
             $(this).toggleClass("active");
             $(".nav ul").toggleClass("show");
 
         });
-      
+
         // 获取div距离窗口的距离
         const f = $(".levitate").offset().top;
         $(window).scroll(function () {
-            $(".levitate").animate(
-                {
-                    top: $(window).scrollTop() + f
-                },
-                {
-                    queue: false, duration: 1000
-                })
+            $(".levitate").animate({
+                top: $(window).scrollTop() + f
+            }, {
+                queue: false,
+                duration: 1000
+            })
         });
 
 

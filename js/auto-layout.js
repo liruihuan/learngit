@@ -30,9 +30,9 @@
         }
     }
     /*当原先没有设置过meta，以及缩放比例
-    * iphone手机根据2,3屏幕处理
-    * 其他设备下，仍旧使用1倍的方案  得到dpr和scale的值
-    * */
+     * iphone手机根据2,3屏幕处理
+     * 其他设备下，仍旧使用1倍的方案  得到dpr和scale的值
+     * */
     if (!dpr && !scale) {
         var isAndroid = win.navigator.appVersion.match(/android/gi);
         var isIPhone = win.navigator.appVersion.match(/iphone/gi);
@@ -55,9 +55,9 @@
     /*设置html的data-dpr的值*/
     docEl.setAttribute('data-dpr', dpr);
     /*
-    *scale
-    * 查询有没有meta属性，没有的情况下加上 <meta content='initial-scale= scale, maximum-scale=scale, minimum-scale=scale, user-scalable=no/>
-    * */
+     *scale
+     * 查询有没有meta属性，没有的情况下加上 <meta content='initial-scale= scale, maximum-scale=scale, minimum-scale=scale, user-scalable=no/>
+     * */
     if (!metaEl) {
         metaEl = doc.createElement('meta');
         metaEl.setAttribute('name', 'viewport');
@@ -71,9 +71,9 @@
         }
     }
     /*
-    * 这个width跟dpr有关系     例如iphone5 dpr为2  得到的屏幕的宽为640px
-    *  例如iphone6 plus dpr为3 得到的屏幕的宽为1242px
-    * */
+     * 这个width跟dpr有关系     例如iphone5 dpr为2  得到的屏幕的宽为640px
+     *  例如iphone6 plus dpr为3 得到的屏幕的宽为1242px
+     * */
     function refreshRem() {
         var width = docEl.getBoundingClientRect().width;
         //注意这里，这里是适配手机的一个具体的参数，相对大于540的就不适用了

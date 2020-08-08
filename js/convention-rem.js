@@ -4,7 +4,7 @@
         resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
 
     /** 查询有没有meta属性，没有的情况下加上 <meta content='initial-scale= scale, maximum-scale=scale, minimum-scale=scale, user-scalable=no/>
-   * */
+     * */
     if (!metaEl) {
         metaEl = doc.createElement('meta');
         metaEl.setAttribute('name', 'viewport');
@@ -18,6 +18,7 @@
             doc.write(wrap.innerHTML);
         }
     }
+
     function refreshRem() {
         var clientWidth = docEl.clientWidth;
         if (!clientWidth) return;
