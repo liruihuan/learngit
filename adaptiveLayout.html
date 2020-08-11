@@ -6,7 +6,7 @@
     <title>响应式布局</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./js/three.min.js"></script>
+    <script src="./js/three.js"></script>
     <script src="js/OBJLoader.js"></script>
 
     <script src="./js/OrbitControls.js"></script>
@@ -66,6 +66,7 @@
         let canvas = document.querySelector(".box5");
         let width = canvas.offsetWidth,
             height = canvas.offsetHeight;
+      
 
         let scene = new THREE.Scene();
         let camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 2000);
@@ -91,7 +92,9 @@
         };
 
         //加载出错回调函数
-        var onError = function (xhr) {};
+        var onError = function (xhr) {
+            console.log(xhr)
+        };
 
         //加载模型
         let loader = new THREE.OBJLoader();
@@ -199,6 +202,7 @@
 
 
     })
+
 </script>
 
 </html>
