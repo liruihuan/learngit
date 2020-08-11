@@ -6,6 +6,10 @@
     <title>响应式布局</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./js/three.min.js"></script>
+    <script src="js/OBJLoader.js"></script>
+
+    <script src="./js/OrbitControls.js"></script>
     <script src="./js/auto-layout.js"></script>
     <!-- <script src="./js/convention-rem.js"></script>  -->
 
@@ -38,14 +42,88 @@
     </div>
     <div class="content">
         <div class="box1"></div>
-        <div class="box2"></div>
-        <div class="levitate">
+        <div class="box2">
+        </div>
+        <div class="box3">
+            <h2>这是一个标题</h2>
+            <p>这是一段测试文字,字体微软雅黑,字号在宽度为750的屏幕上是20,就这样吧!</p>
+        </div>
+        <div class="box4">
+
+        </div>
+        <div class="box5">
 
         </div>
     </div>
+    <div class="levitate">
+
+    </div>
     <div class="banner-bottom"></div>
 
+
+
+    <script>
+        let canvas = document.querySelector(".box5");
+        let width = canvas.offsetWidth,
+            height = canvas.offsetHeight;
+
+        let scene = new THREE.Scene();
+        let camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 2000);
+        camera.position.z = 300;
+        // scene
+
+        scene = new THREE.Scene();
+
+        var ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+        scene.add(ambientLight);
+
+        var pointLight = new THREE.PointLight(0xffffff, 0.8);
+        camera.add(pointLight);
+        scene.add(camera);
+
+        //加载过程回调函数
+        var onProgress = function (xhr) {
+            console.log('console.log');
+            if (xhr.lengthComputable) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log(Math.round(percentComplete, 2) + '% downloaded');
+            }
+        };
+
+        //加载出错回调函数
+        var onError = function (xhr) {};
+
+        //加载模型
+        let loader = new THREE.OBJLoader();
+        loader.load('models/tree.obj', function (obj) {
+            scene.add(obj);
+        }, onProgress, onError);
+
+
+
+
+        let renderer = new THREE.WebGLRenderer();
+        renderer.setSize(width, height);
+        canvas.appendChild(renderer.domElement);
+
+
+
+        let controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableZoom = true; //允许缩放
+        //设置相机移动距离
+        controls.minDistance = 1;
+        controls.maxDistance = 2000;
+        controls.enableRotate = true;
+
+        function render() {
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+        render();
+    </script>
+
 </body>
+
 
 <script>
     $(function () {
@@ -74,7 +152,53 @@
 
 
 
-    });
+        let imageShowArea = document.querySelector('.box4'),
+            imageShowAreaWidth = 480,
+            imageShowAreaHeight = 327,
+            activeFrame = 0,
+            frames = 32,
+            xStart = null,
+            s2Settings = {
+                sensitivity: 40
+            };
+        imageShowArea.addEventListener('touchstart', (e) => {
+            xStart = e.touches ? e.touches[0].clientX : e.clientX;
+        });
+        imageShowArea.addEventListener('mousedown', (e) => {
+            xStart = e.touches ? e.touches[0].clientX : e.clientX;
+        });
+        imageShowArea.addEventListener('touchend', () => {
+            xStart = null;
+        });
+        imageShowArea.addEventListener('mouseup', () => {
+            xStart = null;
+        });
+        imageShowArea.addEventListener("mousemove", moveHandle);
+        imageShowArea.addEventListener("touchmove", moveHandle);
+
+
+        function moveHandle(e) {
+            if (!xStart)
+                return;
+
+            let xEnd = e.touches ? e.touches[0].clientX : e.clientX;
+            if (xStart - xEnd > .5 * imageShowAreaWidth / (10 + s2Settings.sensitivity)) {
+                activeFrame++;
+                if (activeFrame > frames)
+                    activeFrame = 0;
+                imageShowArea.style.backgroundPositionX = `${activeFrame * imageShowAreaWidth}px`;
+                xStart = xEnd;
+            } else if (xEnd - xStart > .5 * imageShowAreaWidth / (10 + s2Settings.sensitivity)) {
+                activeFrame--;
+                if (activeFrame < 0)
+                    activeFrame = frames;
+                imageShowArea.style.backgroundPositionX = `${activeFrame * imageShowAreaWidth}px`;
+                xStart = xEnd;
+            }
+        }
+
+
+    })
 </script>
 
 </html>
