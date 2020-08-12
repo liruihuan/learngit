@@ -6,6 +6,7 @@
     <title>响应式布局</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/lrh.js"></script>
     <script src="./js/three.js"></script>
     <script src="js/OBJLoader.js"></script>
 
@@ -66,7 +67,7 @@
         let canvas = document.querySelector(".box5");
         let width = canvas.offsetWidth,
             height = canvas.offsetHeight;
-      
+
 
         let scene = new THREE.Scene();
         let camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 2000);
@@ -98,6 +99,7 @@
 
         //加载模型
         let loader = new THREE.OBJLoader();
+
         loader.load('models/tree.obj', function (obj) {
             scene.add(obj);
         }, onProgress, onError);
@@ -152,57 +154,94 @@
             })
         });
 
+        let test = new LRH.PressEvent(".box2");
+        test.onlyClick = function () {
+            console.log("单击")
+        }
+        test.pressClick = function () {
+            console.log("长按")
+        }
+        test.moveHandle = function (e, xStart, xEnd, yStart, yEnd) {
 
+            let xMovedDistance = xStart - xEnd;
+            let yMovedDistance = yStart - yEnd;
+            switch (true) {
 
+                case (xMovedDistance > 0):
+                    console.log("左移");
+                    break;
+                case (xMovedDistance < 0):
+                    console.log("右移");
+                    break;
+                case (yMovedDistance > 0):
+                    console.log("上移");
+                    break;
+                case (yMovedDistance < 0):
+                    console.log("下移");
+                    break;
 
+            }
+
+        }
+
+        let test2 = new LRH.PressEvent(".box4");
         let imageShowArea = document.querySelector('.box4'),
             imageShowAreaWidth = 480,
             imageShowAreaHeight = 327,
             activeFrame = 0,
             frames = 32,
-            xStart = null,
             s2Settings = {
                 sensitivity: 40
             };
-        imageShowArea.addEventListener('touchstart', (e) => {
-            xStart = e.touches ? e.touches[0].clientX : e.clientX;
-        });
-        imageShowArea.addEventListener('mousedown', (e) => {
-            xStart = e.touches ? e.touches[0].clientX : e.clientX;
-        });
-        imageShowArea.addEventListener('touchend', () => {
-            xStart = null;
-        });
-        imageShowArea.addEventListener('mouseup', () => {
-            xStart = null;
-        });
-        imageShowArea.addEventListener("mousemove", moveHandle);
-        imageShowArea.addEventListener("touchmove", moveHandle);
+        test2.moveHandle = function (e, xStart, xEnd, yStart, yEnd) {
 
-
-        function moveHandle(e) {
-            if (!xStart)
-                return;
-
-            let xEnd = e.touches ? e.touches[0].clientX : e.clientX;
             if (xStart - xEnd > .5 * imageShowAreaWidth / (10 + s2Settings.sensitivity)) {
                 activeFrame++;
                 if (activeFrame > frames)
                     activeFrame = 0;
                 imageShowArea.style.backgroundPositionX = `${activeFrame * imageShowAreaWidth}px`;
-                xStart = xEnd;
+
             } else if (xEnd - xStart > .5 * imageShowAreaWidth / (10 + s2Settings.sensitivity)) {
                 activeFrame--;
                 if (activeFrame < 0)
                     activeFrame = frames;
                 imageShowArea.style.backgroundPositionX = `${activeFrame * imageShowAreaWidth}px`;
-                xStart = xEnd;
+
             }
+
+
         }
 
 
-    })
 
+
+
+
+
+    })
+</script>
+<script>
+    var a = 1;
+    switch (a) {
+        case 1:
+        case 2:
+            console.log("12");
+            break;
+        default:
+            console.log(13);
+            break;
+    }
+    let base64 =
+        "data:image/png;base64,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";
+    let dataUriRegex = /^data:(.*?)(;base64)?,(.*)$/;
+    let dataUriRegexResult = base64.match(dataUriRegex);
+    console.log(dataUriRegexResult)
+    var mimeType = dataUriRegexResult[1];
+    var isBase64 = !!dataUriRegexResult[2];
+    var data = dataUriRegexResult[3];
+    data = decodeURIComponent( data );
+    if (isBase64) data = atob(data); //用于解码使用base-64编码的字符串  //base-64编码使用方法是 btoa()   
+    console.log(JSON.stringify(data))
 </script>
 
 </html>
