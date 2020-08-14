@@ -77,6 +77,16 @@
   height: 480px;
 }
 
+.content .box6 {
+  width: 480px;
+  height: 480px;
+}
+
+.content .box5-load, .content .box6-load {
+  font-size: 20px;
+  color: #00FFFF;
+}
+
 .levitate {
   display: block;
   width: 2rem;
