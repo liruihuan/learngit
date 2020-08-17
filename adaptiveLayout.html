@@ -96,12 +96,13 @@
 			//加载过程回调函数
 			var onProgress = function (xhr) {
 				if (xhr.lengthComputable) {
-					var percentComplete = xhr.loaded / xhr.total * 100;
-					if (Math.round(percentComplete, 2) >= 99) {
-						$(".box6-load").html('加载完成,渲染中,请稍候!');
-					} else {
-						$(".box5-load").html("已加载" + Math.round(percentComplete, 2) + '%');
-					}
+					const percentComplete = xhr.loaded / xhr.total * 100;
+						const num = Math.round(percentComplete, 2);					
+						if (num === 100) {
+							$(".box5-load").html('加载完成,渲染中,请稍候!');
+						} else {
+							$(".box5-load").html("已加载" + num + '%');
+						}
 				}
 			};
 
@@ -175,6 +176,7 @@
 				let scene = new THREE.Scene();
 				let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
 				camera.position.z = 5;
+				camera.lookAt({ x: 0, y: 0, z: 0 }); //设置视野的中心坐标 
 				// scene
 
 				scene = new THREE.Scene();
@@ -189,11 +191,12 @@
 				//加载过程回调函数
 				var onProgress = function (xhr) {
 					if (xhr.lengthComputable) {
-						var percentComplete = xhr.loaded / xhr.total * 100;
-						if (Math.round(percentComplete, 2) >= 99) {
+						const percentComplete = xhr.loaded / xhr.total * 100;
+						const num = Math.round(percentComplete, 2);					
+						if (num === 100) {
 							$(".box6-load").html('加载完成,渲染中,请稍候!');
 						} else {
-							$(".box6-load").html("已加载" + Math.round(percentComplete, 2) + '%');
+							$(".box6-load").html("已加载" + num + '%');
 						}
 					}
 				};
@@ -234,7 +237,7 @@
 						//更新顶点的法向量
 						geometry.computeVertexNormals();
 
-						//创建纹理，并将模型添加到场景道中
+						//创建纹理，并将模型添加到场景中
 						var material = new THREE.MeshStandardMaterial({
 							color: 0x0055ff,
 							flatShading: true

@@ -24,6 +24,10 @@
   width: 100px;
   height: 100px;
   background-color: aquamarine;
+  text-align: center;
+  line-height: 100px;
+  font-size: 20px;
+  color: #222222;
 }
 
 .content .box2 {
@@ -37,7 +41,7 @@
   background-color: blanchedalmond;
   margin: 20px auto;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
   transition: all 0.5s;
 }
 
@@ -47,9 +51,9 @@
 }
 
 .content .box3 p {
-  font-size: 0.26667rem;
+  font-size: 0.21333rem;
   color: #797979;
-  margin-top: 20px;
+  margin-top: 10px;
   transition: all 0.5s;
 }
 
@@ -95,7 +99,6 @@
   width: 50px;
   box-sizing: border-box;
   height: 30px;
-  font-family: 'Courier New', Courier, monospace;
   font-size: 16px;
   line-height: 30px;
   text-align: center;
@@ -117,7 +120,7 @@
   letter-spacing: 5px;
   text-indent: 20px;
   left: 0;
-  bottom: 0;
+  bottom: 20px;
 }
 
 .levitate {
