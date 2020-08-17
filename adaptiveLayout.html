@@ -1,161 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>响应式布局</title>
-		<link rel="stylesheet" href="./css/style.css">
-		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-		<script src="js/lrh.js"></script>
-		<script src="./js/three.js"></script>
-		<script src="js/OBJLoader.js"></script>
-		<script src="js/PLYLoader.js"></script>
-		<script src="./js/OrbitControls.js"></script>
-		<script src="./js/auto-layout.js"></script>
-		<!-- <script src="./js/convention-rem.js"></script>  -->
+<head>
+	<meta charset="UTF-8">
+	<title>响应式布局</title>
+	<link rel="stylesheet" href="./css/style.css">
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/lrh.js"></script>
+	<script src="./js/three.js"></script>
+	<script src="js/OBJLoader.js"></script>
+	<script src="js/PLYLoader.js"></script>
+	<script src="./js/OrbitControls.js"></script>
+	<script src="./js/auto-layout.js"></script>
+	<!-- <script src="./js/convention-rem.js"></script>  -->
 
-	</head>
+</head>
 
-	<body>
-		<div class="nav">
-			<ul>
-				<li>
-					<a href="#" class="actived">首页</a>
-				</li>
-				<li>
-					<a href="#">相机</a>
-				</li>
-				<li>
-					<a href="#">软件</a>
-				</li>
-				<li>
-					<a href="#">解决方案</a>
-				</li>
-				<li>
-					<a href="#">关于我们</a>
-				</li>
-			</ul>
-			<div class="menu-btn">
-				<span class="btn-top"></span>
-				<span class="btn-middle"></span>
-				<span class="btn-bottom"></span>
-			</div>
+<body>
+	<div class="nav">
+		<ul>
+			<li>
+				<a href="#" class="actived">首页</a>
+			</li>
+			<li>
+				<a href="#">相机</a>
+			</li>
+			<li>
+				<a href="#">软件</a>
+			</li>
+			<li>
+				<a href="#">解决方案</a>
+			</li>
+			<li>
+				<a href="#">关于我们</a>
+			</li>
+		</ul>
+		<div class="menu-btn">
+			<span class="btn-top"></span>
+			<span class="btn-middle"></span>
+			<span class="btn-bottom"></span>
 		</div>
-		<div class="content">
-			<div class="box1"></div>
-			<div class="box2">
-			</div>
-			<div class="box3">
-				<h2>这是一个标题</h2>
-				<p>这是一段测试文字,字体微软雅黑,字号在宽度为750的屏幕上是20,就这样吧!</p>
-			</div>
-			<div class="box4">
+	</div>
+	<div class="content">
+		<div class="box1"></div>
+		<div class="box2">
+		</div>
+		<div class="box3">
+			<h2>这是一个标题</h2>
+			<p>这是一段测试文字,字体微软雅黑,字号在宽度为750的屏幕上是20,就这样吧!</p>
+		</div>
+		<div class="box4">
 
-			</div>
-			<div class="box5">
-
-			</div>
+		</div>
+		<div class="box5">
 			<p class="box5-load"></p>
-			<div class="box6">
+		</div>
 
-			</div>
+		<div class="box6">
 			<p class="box6-load"></p>
+			<ul>
+				<li class="active" data-number=1>小</li>
+				<li data-number=20>中</li>
+				<li data-number=100>大</li>
 
+			</ul>
 		</div>
-		<div class="levitate">
 
-		</div>
-		<div class="banner-bottom"></div>
 
-		<script>
-			(function() {
-				let canvas = document.querySelector(".box5");
-				let width = canvas.offsetWidth,
-					height = canvas.offsetHeight;
+	</div>
+	<div class="levitate">
 
-				let scene = new THREE.Scene();
-				let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-				camera.position.z = 5;
-				// scene
+	</div>
+	<div class="banner-bottom"></div>
 
-				scene = new THREE.Scene();
+	<script>
+		(function () {
+			let canvas = document.querySelector(".box5");
+			let width = canvas.offsetWidth,
+				height = canvas.offsetHeight;
 
-				var ambientLight = new THREE.AmbientLight(0xcccccc, 0.4); //环境光
-				scene.add(ambientLight);
+			let scene = new THREE.Scene();
+			let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+			camera.position.z = 5;
+			// scene
 
-				var pointLight = new THREE.PointLight(0xffffff, 0.8);
-				camera.add(pointLight);
-				scene.add(camera);
+			scene = new THREE.Scene();
 
-				//加载过程回调函数
-				var onProgress = function(xhr) {
-					if(xhr.lengthComputable) {
-						var percentComplete = xhr.loaded / xhr.total * 100;
-						$(".box5-load").html(" ");
-						$(".box5-load").html("已加载"+Math.round(percentComplete, 2) + '%');
-					}
-				};
+			var ambientLight = new THREE.AmbientLight(0xcccccc, 0.4); //环境光
+			scene.add(ambientLight);
 
-				//加载出错回调函数
-				var onError = function(xhr) {
-					console.log(xhr)
-				};
+			var pointLight = new THREE.PointLight(0xffffff, 0.8);
+			camera.add(pointLight);
+			scene.add(camera);
 
-				//加载模型
-				let loader = new THREE.OBJLoader();
-
-				loader.load('models/tree.obj', function(obj) {
-
-					if(obj.isMesh) {
-						obj.geometry.center(); // center here
+			//加载过程回调函数
+			var onProgress = function (xhr) {
+				if (xhr.lengthComputable) {
+					var percentComplete = xhr.loaded / xhr.total * 100;
+					$(".box5-load").html(" ");
+					if (Math.round(percentComplete, 2) === 100) {
+						$(".box5-load").html("已加载" + Math.round(percentComplete, 2) + '%,渲染中,请稍候!');
 					} else {
-						/**
-						 * 包围盒全自动计算：模型整体居中
-						 */
-						var box3 = new THREE.Box3()
-						// 计算层级模型group的包围盒
-						// 模型group是加载一个三维模型返回的对象，包含多个网格模型
-						box3.expandByObject(obj)
-						// 计算一个层级模型对应包围盒的几何体中心在世界坐标中的位置
-						var center = new THREE.Vector3()
-						box3.getCenter(center)
-						console.log('查看几何体中心坐标', center);
-
-						// 重新设置模型的位置，使之居中。
-						obj.position.x = obj.position.x - center.x
-						obj.position.y = obj.position.y - center.y
-						obj.position.z = obj.position.z - center.z
+						$(".box5-load").html("已加载" + Math.round(percentComplete, 2) + '%');
 					}
-//					console.log(obj)
-					scene.add(obj);
-//					var material = new THREE.PointsMaterial({
-//						color: 0xCC00FF,
-//						size: 0.01
-//					})  //3d文件显示为点云
-//					mesh = new THREE.Points(obj.children[0].geometry, material)
-//					scene.add(mesh)
-					}, onProgress, onError);
-
-					let renderer = new THREE.WebGLRenderer();
-					renderer.setSize(width, height);
-					canvas.appendChild(renderer.domElement);
-
-					let controls = new THREE.OrbitControls(camera, renderer.domElement);
-					controls.enableZoom = true;//允许缩放
-				//设置相机移动距离
-				controls.minDistance = 1;
-				controls.maxDistance = 2000;
-				controls.enableRotate = true;
-
-				function render() {
-					requestAnimationFrame(render);
-					renderer.render(scene, camera);
 				}
-				render();
-			})()
-		</script>
-		<script type="text/javascript">
-			(function() {
+			};
+
+			//加载出错回调函数
+			var onError = function (xhr) {
+				$(".box5-load").html(" ");
+				$(".box5-load").html("渲染失败!");
+				console.log(xhr)
+			};
+
+			//加载模型
+			let loader = new THREE.OBJLoader();
+
+			loader.load('models/tree.obj', function (obj) {
+
+				if (obj.isMesh) {
+					obj.geometry.center(); // center here
+				} else {
+					/**
+					 * 包围盒全自动计算：模型整体居中
+					 */
+					var box3 = new THREE.Box3()
+					// 计算层级模型group的包围盒
+					// 模型group是加载一个三维模型返回的对象，包含多个网格模型
+					box3.expandByObject(obj)
+					// 计算一个层级模型对应包围盒的几何体中心在世界坐标中的位置
+					var center = new THREE.Vector3()
+					box3.getCenter(center)
+					console.log('查看几何体中心坐标', center);
+
+					// 重新设置模型的位置，使之居中。
+					obj.position.x = obj.position.x - center.x
+					obj.position.y = obj.position.y - center.y
+					obj.position.z = obj.position.z - center.z
+				}
+				//					console.log(obj)
+				scene.add(obj);
+				$(".box5-load").html(" ");
+				$(".box5-load").html('渲染成功!');
+				//					var material = new THREE.PointsMaterial({
+				//						color: 0xCC00FF,
+				//						size: 0.01
+				//					})  //3d文件显示为点云
+				//					mesh = new THREE.Points(obj.children[0].geometry, material)
+				//					scene.add(mesh)
+			}, onProgress, onError);
+
+			let renderer = new THREE.WebGLRenderer();
+			renderer.setSize(width, height);
+			canvas.appendChild(renderer.domElement);
+
+			let controls = new THREE.OrbitControls(camera, renderer.domElement);
+			controls.enableZoom = true;//允许缩放
+			//设置相机移动距离
+			controls.minDistance = 1;
+			controls.maxDistance = 2000;
+			controls.enableRotate = true;
+
+			function render() {
+				requestAnimationFrame(render);
+				renderer.render(scene, camera);
+			}
+			render();
+		})()
+	</script>
+	<script type="text/javascript">
+
+			(function () {
 				let canvas = document.querySelector(".box6");
 				let width = canvas.offsetWidth,
 					height = canvas.offsetHeight;
@@ -175,39 +190,71 @@
 				scene.add(camera);
 
 				//加载过程回调函数
-				var onProgress = function(xhr) {
-					if(xhr.lengthComputable) {
+				var onProgress = function (xhr) {
+					if (xhr.lengthComputable) {
 						var percentComplete = xhr.loaded / xhr.total * 100;
 						$(".box6-load").html(" ");
-						$(".box6-load").html("已加载"+Math.round(percentComplete, 2) + '%');
+						if (Math.round(percentComplete, 2) === 100) {
+							$(".box6-load").html("已加载" + Math.round(percentComplete, 2) + '%,渲染中,请稍候!');
+						} else {
+							$(".box6-load").html("已加载" + Math.round(percentComplete, 2) + '%');
+						}
 					}
 				};
 
 				//加载出错回调函数
-				var onError = function(xhr) {
+				var onError = function (xhr) {
+					$(".box6-load").html(" ");
+					$(".box6-load").html("渲染失败!");
 					console.log(xhr)
 				};
 
 				//加载模型
 				let loader = new THREE.PLYLoader();
+				let loadingWait = true, current = 0;
+				$(".box6 ul li").click(function () {
+					if (!loadingWait) return;
+					let a = $(this).data("number")
+					if (a === current) return;
+					$(".box6 ul li").removeClass("active");
+					$(this).addClass("active");
+					loadingWait = false;
 
-				loader.load('./models/component.ply', function(geometry) {
+					loadPly(a)
 
-					//更新顶点的法向量
-					geometry.computeVertexNormals();
+				})
+				loadPly(1)
+				function loadPly(size) {
+					loader.load(`./models/component_${size}w.ply`, function (geometry) {
+						current = size;
+						if (scene.children && scene.children.length > 2) {
+							scene.children.forEach(element => {
+								if (element.type === "Mesh") {
 
-					//创建纹理，并将模型添加到场景道中
-					var material = new THREE.MeshStandardMaterial({
-						color: 0x0055ff,
-						flatShading: true
-					});
-					var mesh = new THREE.Mesh(geometry, material);
-					mesh.position.y = - 0.2;
-					mesh.position.z = 0.3;
-					mesh.rotation.x = -0.5 * Math.PI; //将模型摆正
-					mesh.scale.set(0.05, 0.05, 0.05);
-					scene.add(mesh);
-				}, onProgress, onError);
+									scene.remove(element)
+								}
+							});
+						}
+
+						//更新顶点的法向量
+						geometry.computeVertexNormals();
+
+						//创建纹理，并将模型添加到场景道中
+						var material = new THREE.MeshStandardMaterial({
+							color: 0x0055ff,
+							flatShading: true
+						});
+						var mesh = new THREE.Mesh(geometry, material);
+						mesh.position.y = -0.2;
+						mesh.position.z = 0.3;
+						mesh.rotation.x = -0.5 * Math.PI; //将模型摆正
+						mesh.scale.set(0.03, 0.03, 0.03);
+						scene.add(mesh);
+						$(".box6-load").html(" ");
+						$(".box6-load").html('渲染成功!');
+						loadingWait = true;
+					}, onProgress, onError);
+				}
 
 				let renderer = new THREE.WebGLRenderer();
 				renderer.setSize(width, height);
@@ -226,110 +273,110 @@
 				}
 				render();
 			})()
-		</script>
-
-	</body>
-
-	<script>
-		$(function() {
-			$(".nav ul li").click(function() { //导航点击
-				$(".nav ul li a").removeClass("actived");
-				$(this).children("a").addClass("actived");
-			});
-			$(".menu-btn").click(function() { //显示或隐藏下方导航列表
-
-				$(this).toggleClass("active");
-				$(".nav ul").toggleClass("show");
-
-			});
-
-			// 获取div距离窗口的距离
-			const f = $(".levitate").offset().top;
-			$(window).scroll(function() {
-				$(".levitate").animate({
-					top: $(window).scrollTop() + f
-				}, {
-					queue: false,
-					duration: 1000
-				})
-			});
-
-			let time = new LRH.TimeHandle();
-			console.log(time.sendMessageTime(new Date), time.sendMessageTime("2020-08-12 17:02:30"), time.sendMessageTime("2020-08-10 17:02:30"))
-
-			let test = new LRH.PressEvent(".box2");
-			test.onlyClick = function() {
-				$(".box1").html("")
-				$(".box1").html("单击")
-			}
-			test.pressClick = function() {
-				$(".box1").html("")
-				$(".box1").html("长按")
-			}
-			test.moveHandle = function(e, xStart, xEnd, yStart, yEnd) {
-				$(".box1").html("")
-				let xMovedDistance = xStart - xEnd;
-				let yMovedDistance = yStart - yEnd;
-				switch(true) {
-
-					case(xMovedDistance > 0):
-						$(".box1").html("左移")
-						break;
-					case(xMovedDistance < 0):
-						$(".box1").html("右移")
-						break;
-					case(yMovedDistance > 0):
-						$(".box1").html("上移")
-						break;
-					case(yMovedDistance < 0):
-						$(".box1").html("下移")
-						break;
-
-				}
-
-			}
-
-			let test2 = new LRH.PressEvent(".box4");
-			let imageShowArea = document.querySelector('.box4'),
-				imageShowAreaWidth = 480,
-				imageShowAreaHeight = 327,
-				activeFrame = 0,
-				frames = 32,
-				s2Settings = {
-					sensitivity: 40
-				};
-			test2.moveHandle = function(e, xStart, xEnd, yStart, yEnd) {
-
-				if(xStart - xEnd > .5 * imageShowAreaWidth / (10 + s2Settings.sensitivity)) {
-					activeFrame++;
-					if(activeFrame > frames)
-						activeFrame = 0;
-					imageShowArea.style.backgroundPositionX = `${activeFrame * imageShowAreaWidth}px`;
-
-				} else if(xEnd - xStart > .5 * imageShowAreaWidth / (10 + s2Settings.sensitivity)) {
-					activeFrame--;
-					if(activeFrame < 0)
-						activeFrame = frames;
-					imageShowArea.style.backgroundPositionX = `${activeFrame * imageShowAreaWidth}px`;
-
-				}
-
-			}
-
-		})
 	</script>
-	<script>
-		let base64 =
-			"data:image/png;base64,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";
-		let dataUriRegex = /^data:(.*?)(;base64)?,(.*)$/;
-		let dataUriRegexResult = base64.match(dataUriRegex);
-		console.log(dataUriRegexResult)
-		var mimeType = dataUriRegexResult[1];
-		var isBase64 = !!dataUriRegexResult[2];
-		var data = dataUriRegexResult[3];
-		data = decodeURIComponent(data);
-		if(isBase64) data = atob(data); //用于解码使用base-64编码的字符串  //base-64编码使用方法是 btoa()   
+
+</body>
+
+<script>
+	$(function () {
+		$(".nav ul li").click(function () { //导航点击
+			$(".nav ul li a").removeClass("actived");
+			$(this).children("a").addClass("actived");
+		});
+		$(".menu-btn").click(function () { //显示或隐藏下方导航列表
+
+			$(this).toggleClass("active");
+			$(".nav ul").toggleClass("show");
+
+		});
+
+		// 获取div距离窗口的距离
+		const f = $(".levitate").offset().top;
+		$(window).scroll(function () {
+			$(".levitate").animate({
+				top: $(window).scrollTop() + f
+			}, {
+				queue: false,
+				duration: 1000
+			})
+		});
+
+		let time = new LRH.TimeHandle();
+		console.log(time.sendMessageTime(new Date), time.sendMessageTime("2020-08-12 17:02:30"), time.sendMessageTime("2020-08-10 17:02:30"))
+
+		let test = new LRH.PressEvent(".box2");
+		test.onlyClick = function () {
+			$(".box1").html("")
+			$(".box1").html("单击")
+		}
+		test.pressClick = function () {
+			$(".box1").html("")
+			$(".box1").html("长按")
+		}
+		test.moveHandle = function (e, xStart, xEnd, yStart, yEnd) {
+			$(".box1").html("")
+			let xMovedDistance = xStart - xEnd;
+			let yMovedDistance = yStart - yEnd;
+			switch (true) {
+
+				case (xMovedDistance > 0):
+					$(".box1").html("左移")
+					break;
+				case (xMovedDistance < 0):
+					$(".box1").html("右移")
+					break;
+				case (yMovedDistance > 0):
+					$(".box1").html("上移")
+					break;
+				case (yMovedDistance < 0):
+					$(".box1").html("下移")
+					break;
+
+			}
+
+		}
+
+		let test2 = new LRH.PressEvent(".box4");
+		let imageShowArea = document.querySelector('.box4'),
+			imageShowAreaWidth = 480,
+			imageShowAreaHeight = 327,
+			activeFrame = 0,
+			frames = 32,
+			s2Settings = {
+				sensitivity: 40
+			};
+		test2.moveHandle = function (e, xStart, xEnd, yStart, yEnd) {
+
+			if (xStart - xEnd > .5 * imageShowAreaWidth / (10 + s2Settings.sensitivity)) {
+				activeFrame++;
+				if (activeFrame > frames)
+					activeFrame = 0;
+				imageShowArea.style.backgroundPositionX = `${activeFrame * imageShowAreaWidth}px`;
+
+			} else if (xEnd - xStart > .5 * imageShowAreaWidth / (10 + s2Settings.sensitivity)) {
+				activeFrame--;
+				if (activeFrame < 0)
+					activeFrame = frames;
+				imageShowArea.style.backgroundPositionX = `${activeFrame * imageShowAreaWidth}px`;
+
+			}
+
+		}
+
+	})
+</script>
+<script>
+	let base64 =
+		"data:image/png;base64,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";
+	let dataUriRegex = /^data:(.*?)(;base64)?,(.*)$/;
+	let dataUriRegexResult = base64.match(dataUriRegex);
+	console.log(dataUriRegexResult)
+	var mimeType = dataUriRegexResult[1];
+	var isBase64 = !!dataUriRegexResult[2];
+	var data = dataUriRegexResult[3];
+	data = decodeURIComponent(data);
+	if (isBase64) data = atob(data); //用于解码使用base-64编码的字符串  //base-64编码使用方法是 btoa()   
 //		console.log(JSON.stringify(data))
-	</script>
+</script>
 
 </html>
