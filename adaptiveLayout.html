@@ -97,9 +97,8 @@
 			var onProgress = function (xhr) {
 				if (xhr.lengthComputable) {
 					var percentComplete = xhr.loaded / xhr.total * 100;
-					$(".box5-load").html(" ");
-					if (Math.round(percentComplete, 2) === 100) {
-						$(".box5-load").html("已加载" + Math.round(percentComplete, 2) + '%,渲染中,请稍候!');
+					if (Math.round(percentComplete, 2) >= 99) {
+						$(".box6-load").html('加载完成,渲染中,请稍候!');
 					} else {
 						$(".box5-load").html("已加载" + Math.round(percentComplete, 2) + '%');
 					}
@@ -108,7 +107,6 @@
 
 			//加载出错回调函数
 			var onError = function (xhr) {
-				$(".box5-load").html(" ");
 				$(".box5-load").html("渲染失败!");
 				console.log(xhr)
 			};
@@ -140,7 +138,6 @@
 				}
 				//					console.log(obj)
 				scene.add(obj);
-				$(".box5-load").html(" ");
 				$(".box5-load").html('渲染成功!');
 				//					var material = new THREE.PointsMaterial({
 				//						color: 0xCC00FF,
@@ -193,9 +190,8 @@
 				var onProgress = function (xhr) {
 					if (xhr.lengthComputable) {
 						var percentComplete = xhr.loaded / xhr.total * 100;
-						$(".box6-load").html(" ");
-						if (Math.round(percentComplete, 2) === 100) {
-							$(".box6-load").html("已加载" + Math.round(percentComplete, 2) + '%,渲染中,请稍候!');
+						if (Math.round(percentComplete, 2) >= 99) {
+							$(".box6-load").html('加载完成,渲染中,请稍候!');
 						} else {
 							$(".box6-load").html("已加载" + Math.round(percentComplete, 2) + '%');
 						}
@@ -204,7 +200,6 @@
 
 				//加载出错回调函数
 				var onError = function (xhr) {
-					$(".box6-load").html(" ");
 					$(".box6-load").html("渲染失败!");
 					console.log(xhr)
 				};
@@ -250,7 +245,6 @@
 						mesh.rotation.x = -0.5 * Math.PI; //将模型摆正
 						mesh.scale.set(0.03, 0.03, 0.03);
 						scene.add(mesh);
-						$(".box6-load").html(" ");
 						$(".box6-load").html('渲染成功!');
 						loadingWait = true;
 					}, onProgress, onError);
@@ -302,19 +296,16 @@
 		});
 
 		let time = new LRH.TimeHandle();
-		console.log(time.sendMessageTime(new Date), time.sendMessageTime("2020-08-12 17:02:30"), time.sendMessageTime("2020-08-10 17:02:30"))
+		console.log(time.sendMessageTime(new Date))
 
 		let test = new LRH.PressEvent(".box2");
 		test.onlyClick = function () {
-			$(".box1").html("")
 			$(".box1").html("单击")
 		}
 		test.pressClick = function () {
-			$(".box1").html("")
 			$(".box1").html("长按")
 		}
 		test.moveHandle = function (e, xStart, xEnd, yStart, yEnd) {
-			$(".box1").html("")
 			let xMovedDistance = xStart - xEnd;
 			let yMovedDistance = yStart - yEnd;
 			switch (true) {

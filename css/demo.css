@@ -85,7 +85,7 @@
   width: 150px;
   position: absolute;
   top: 20px;
-  right: 20px;
+  left: 20px;
   border: 1px solid #44a8f2;
   border-radius: 3px;
   display: flex;
@@ -100,11 +100,13 @@
   line-height: 30px;
   text-align: center;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .content .box6 ul .active {
   color: #44a8f2;
   background-color: #797979;
+  cursor: default;
 }
 
 .content .box5-load,
@@ -146,10 +148,9 @@
   transform: translateY(0);
   position: fixed;
   bottom: 15px;
-  left: 50%;
+  right: 20px;
   width: 2rem;
   height: 2rem;
-  margin-left: -1rem;
   background: url(../images/icon.gif) no-repeat;
   background-size: cover;
   z-index: 10;
