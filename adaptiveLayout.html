@@ -105,12 +105,12 @@
 			var onProgress = function (xhr) {
 				if (xhr.lengthComputable) {
 					const percentComplete = xhr.loaded / xhr.total * 100;
-						const num = Math.round(percentComplete, 2);					
-						if (num === 100) {
-							$(".box5-load").html('加载完成,渲染中,请稍候!');
-						} else {
-							$(".box5-load").html("已加载" + num + '%');
-						}
+					const num = Math.round(percentComplete, 2);
+					if (num === 100) {
+						$(".box5-load").html('加载完成,渲染中,请稍候!');
+					} else {
+						$(".box5-load").html("已加载" + num + '%');
+					}
 				}
 			};
 
@@ -200,7 +200,7 @@
 				var onProgress = function (xhr) {
 					if (xhr.lengthComputable) {
 						const percentComplete = xhr.loaded / xhr.total * 100;
-						const num = Math.round(percentComplete, 2);					
+						const num = Math.round(percentComplete, 2);
 						if (num === 100) {
 							$(".box6-load").html('加载完成,渲染中,请稍候!');
 						} else {
@@ -251,8 +251,9 @@
 							flatShading: true
 						});
 						var mesh = new THREE.Mesh(geometry, material);
-						mesh.position.y = -0.2;
-						mesh.position.z = 0.3;
+						mesh.position.x = - 0.4;
+						mesh.position.y = -0.4;
+						mesh.position.z = -0.2;
 						mesh.rotation.x = -0.5 * Math.PI; //将模型摆正
 						mesh.scale.set(0.03, 0.03, 0.03);
 						scene.add(mesh);
@@ -308,8 +309,8 @@
 
 		let time = new LRH.TimeHandle();
 		console.log(time.sendMessageTime(new Date))
-		
-		
+
+
 		let test = new LRH.PressEvent(".box2");
 		test.onlyClick = function () {
 			$(".box1").html("单击")
