@@ -6,6 +6,7 @@
 	<title>响应式布局</title>
 	<link rel="stylesheet" href="./css/style.css">
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
 	<script src="js/lrh.js"></script>
 	<script src="./js/three.js"></script>
 	<script src="js/OBJLoader.js"></script>
@@ -123,7 +124,7 @@
 			//加载模型
 			let loader = new THREE.OBJLoader();
 
-			loader.load('models/tree.obj', function (obj) {
+			loader.load('./models/tree.obj', function (obj) {
 
 				if (obj.isMesh) {
 					obj.geometry.center(); // center here
