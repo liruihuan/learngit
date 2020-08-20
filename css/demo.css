@@ -138,7 +138,7 @@
     -webkit-transform: translateY(0px);
   }
   50% {
-    -webkit-transform: translateY(-20px);
+    -webkit-transform: translateY(-10px);
   }
   100% {
     -webkit-transform: translateY(0px);
@@ -150,11 +150,20 @@
   animation: changeY 2s ease-in-out infinite;
   transform: translateY(0);
   position: fixed;
-  bottom: 15px;
-  right: 20px;
-  width: 2rem;
-  height: 2rem;
-  background: url(../images/icon.gif) no-repeat;
+  top: 0;
+  right: 0;
+  width: 0.93333rem;
+  background: url(../images/scroll.png) no-repeat;
   background-size: cover;
+  background-position: bottom;
   z-index: 10;
+}
+
+.banner-bottom .click-area {
+  position: absolute;
+  width: 80%;
+  height: 36px;
+  left: 10%;
+  bottom: 59px;
+  cursor: url(../images/cursor.cur), auto;
 }

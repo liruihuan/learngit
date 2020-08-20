@@ -3,28 +3,32 @@
 const http = require('http');
 const fs = require('fs');
 const server = http.createServer();
+const mimeType = require("./js/mime-type.js");
+
+
 
 const readFolder = function (request, response) {
     const url = request.url;
-    // console.log(url);
+
     if (url === '/' || url === "/adaptiveLayout") {
-        response.writeHead(200, { 'Content-Type': 'text/html' });
         fs.readFile('./adaptiveLayout.html', function (error, data) {
             if (error) {
                 console.error(error);
                 return;
             }
+            response.writeHead(200, { 'Content-Type': 'text/html' });
             response.end(data);
         });
     } else if (url !== '/') {
+        const contentType = mimeType(url);
         const surl = '.' + url;
-        const type = surl.substr(surl.lastIndexOf(".") + 1, surl.length)
-        response.writeHead(200, { 'Content-type': "text/" + type });
+
         fs.readFile(surl, function (error, data) {
             if (error) {
                 console.error(error);
                 return;
             }
+            response.writeHead(200, { 'Content-type': contentType, 'Content-Length': Buffer.byteLength(data) });
             response.end(data);
         });
     }

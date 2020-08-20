@@ -1,6 +1,14 @@
 @import "demo.min.css";
 @import "common.css";
-
+.scrollbar {
+    position: fixed;
+    top: 0;
+    height: 3px;
+    background: #44a8f2;
+    transition-property:width;
+    transition-duration: 1s;
+    z-index: 99999;
+}
 .nav {
     position: fixed;
     background-color: #fff;
