@@ -15,7 +15,11 @@
 			timer = setTimeout(() => {
 				if (timer !== null) {
 					press = true;
-					this.pressClick()
+					try {
+						this.pressClick()
+					} catch (error) {
+						console.error(error)
+					}
 				}
 			}, 500)
 
@@ -26,7 +30,11 @@
 			timer = setTimeout(() => {
 				if (timer !== null) {
 					press = true;
-					this.pressClick()
+					try {
+						this.pressClick()
+					} catch (error) {
+						console.error(error)
+					}
 				}
 			}, 500)
 
@@ -35,7 +43,11 @@
 			clearTimeout(timer)
 			xStart = xEnd = yStart = yEnd = timer = null;
 			if (!press) {
-				this.onlyClick()
+				try {
+					this.onlyClick()
+				} catch (error) {
+					console.error(error)
+				}
 			}
 			press = false;
 		});
@@ -43,7 +55,11 @@
 			clearTimeout(timer)
 			xStart = xEnd = yStart = yEnd = timer = null;
 			if (!press) {
-				this.onlyClick()
+				try {
+					this.onlyClick()
+				} catch (error) {
+					console.error(error)
+				}
 			}
 			press = false;
 		});
@@ -180,7 +196,7 @@
 					createdTime.getDate() +
 					'日'
 			}
-			time += (createdTime.getHours() > 12 ? ("下午" + (createdTime.getHours() - 12)) : ("上午" + createdTime.getHours())) + ":" + (createdTime.getMinutes() > 10 ? createdTime.getMinutes() : "0" + createdTime.getMinutes());
+			time += (createdTime.getHours() > 12 ? ("下午" + (createdTime.getHours() - 12)) : ("上午" + createdTime.getHours())) + ":" + (createdTime.getMinutes() >= 10 ? createdTime.getMinutes() : "0" + createdTime.getMinutes());
 			return time;
 
 		}
