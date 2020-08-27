@@ -1,5 +1,7 @@
-@import "demo.min.css";
 @import "common.css";
+@import "demo.min.css";
+@import "rotate.css";
+
 
 .scrollbar {
     position: fixed;
