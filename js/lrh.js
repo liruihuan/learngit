@@ -72,8 +72,8 @@
 		this.tempDeclaration = function (e) {
 			if (!xStart)
 				return;
-			press = true; //防止松开触发点击事件
-			timer = null; //防止移动时触发长按事件
+			press = true; // 防止松开触发点击事件
+			timer = null; // 防止移动时触发长按事件
 			xEnd = e.touches ? e.touches[0].clientX : e.clientX;
 			yEnd = e.touches ? e.touches[0].clientY : e.clientY;
 			try {
@@ -216,12 +216,12 @@
 		}
 
 		this.array = array;
-		this.key = key && temp ? key : false; //key为对象里面的属性
+		this.key = key && temp ? key : false; // key为对象里面的属性
 	}
 	Object.assign(RemoveRepetition.prototype, {
 		repetition: function () {
 			if (this.key) {
-				//对象数组
+				// 对象数组
 				for (let i = 0; i < this.array.length; i++) {
 					for (let j = i + 1; j < this.array.length; j++) {
 						if (this.array[i][this.key] === this.array[j][this.key]) {
@@ -246,7 +246,60 @@
 		}
 
 	})
+	//
+	function Rotate3D(element) {
+		// offsetLeft,offsetTop值,当上级没有非静态定位以body为参考,当有非静态定位就以此上级为参考系
+		// element的父级不要有非静态定位,offsetLeft,offsetTop要以body为参考系,否则可能不准确
+		if (!element) return;
+		this.element = element;
+		this.parseDirection = Function;// 此方法供外部回调获取方向做一些操作
+		const nodes = document.querySelectorAll(this.element),
+			nodeLists = [].slice.call(nodes, 0);
+		// div对角相连分成上下左右四个区域,判断鼠标进出方向
+		// x坐标：e.pageX - offsetLeft - w/2  y坐标：e.pageY - offsetTop - h/2
+		// Math.atan2(x,y)函数 相当于这个点的角度
+		// 公式：弧度=角度乘以π后再除以180，角度=弧度除以π再乘以180　　
+		// +180 原来的坐标轴是(-180,180)度的，加个180那么就都成正的，即(0,360)
+		// /90 ：那为什么要除于90呢，要知道90，就必须理解  
+		// (w > h ? (h / w) : 1)和 (h > w ? (w / h) : 1) 将矩形矫正成正方形,使两条对角线相交的那些角就都是90度
+		// +3  角度区间是从右上方开始算起的，所以加三就是将第一区间变成上。顺序是 上右下左
+		// %4取余，保证结果是0、1、2、3 之间的一个（分别代表上、右、下、左）。
+		const getDirection = function (ev, obj) {
+			const w = obj.offsetWidth,
+				h = obj.offsetHeight,
+				x = (ev.pageX - obj.offsetLeft - (w / 2)) * (w > h ? (h / w) : 1),
+				y = (ev.pageY - obj.offsetTop - (h / 2)) * (h > w ? (w / h) : 1),
+				d = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+			return d;
+		};
+		const _this = this;
+		const addClass = function (ev, obj, state) {
+			const direction = getDirection(ev, obj);
+			_this.parseDirection(direction); // 传值
+			let classSuffix = "";
+			obj.className = "";
+			switch (direction) {
+				case 0: classSuffix = '-top'; break;
+				case 1: classSuffix = '-right'; break;
+				case 2: classSuffix = '-bottom'; break;
+				case 3: classSuffix = '-left'; break;
+			}
+
+			obj.classList.add(state + classSuffix);
+		};
+		nodeLists.forEach(function (el) {
+			el.addEventListener('mouseover', function (ev) {
+				addClass(ev, this, 'in');
+			}, false);
+
+			el.addEventListener('mouseout', function (ev) {
+				addClass(ev, this, 'out');
+			}, false);
+		});
+
+	}
 	LRH.PressEvent = PressEvent;
 	LRH.TimeHandle = TimeHandle;
 	LRH.RemoveRepetition = RemoveRepetition;
+	LRH.Rotate3D = Rotate3D;
 })(window, window['LRH'] || (window['LRH'] = {}))

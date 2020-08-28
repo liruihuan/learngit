@@ -7,7 +7,7 @@
 	overflow: hidden;
 }
 
-.info {
+.scene>div>div {
 	transform: rotate3d(1, 0, 0, 0deg);
 	width: 100%;
 	height: 100%;
@@ -20,56 +20,56 @@
 	background: rgba(2, 23, 30, 0.6);
 }
 
-.in-top .info {
+.in-top>div {
 	-webkit-transform-origin: 50% 0%;
 	transform-origin: 50% 0%;
 	-webkit-animation: in-top 300ms ease 0ms 1 forwards;
 	animation: in-top 300ms ease 0ms 1 forwards;
 }
 
-.in-right .info {
+.in-right>div {
 	-webkit-transform-origin: 100% 0%;
 	transform-origin: 100% 0%;
 	-webkit-animation: in-right 300ms ease 0ms 1 forwards;
 	animation: in-right 300ms ease 0ms 1 forwards;
 }
 
-.in-bottom .info {
+.in-bottom >div {
 	-webkit-transform-origin: 50% 100%;
 	transform-origin: 50% 100%;
 	-webkit-animation: in-bottom 300ms ease 0ms 1 forwards;
 	animation: in-bottom 300ms ease 0ms 1 forwards;
 }
 
-.in-left .info {
+.in-left>div {
 	-webkit-transform-origin: 0% 0%;
 	transform-origin: 0% 0%;
 	-webkit-animation: in-left 300ms ease 0ms 1 forwards;
 	animation: in-left 300ms ease 0ms 1 forwards;
 }
 
-.out-top .info {
+.out-top>div {
 	-webkit-transform-origin: 50% 0%;
 	transform-origin: 50% 0%;
 	-webkit-animation: out-top 300ms ease 0ms 1 forwards;
 	animation: out-top 300ms ease 0ms 1 forwards;
 }
 
-.out-right .info {
+.out-right>div {
 	-webkit-transform-origin: 100% 50%;
 	transform-origin: 100% 50%;
 	-webkit-animation: out-right 300ms ease 0ms 1 forwards;
 	animation: out-right 300ms ease 0ms 1 forwards;
 }
 
-.out-bottom .info {
+.out-bottom>div {
 	-webkit-transform-origin: 50% 100%;
 	transform-origin: 50% 100%;
 	-webkit-animation: out-bottom 300ms ease 0ms 1 forwards;
 	animation: out-bottom 300ms ease 0ms 1 forwards;
 }
 
-.out-left .info {
+.out-left>div {
 	-webkit-transform-origin: 0% 0%;
 	transform-origin: 0% 0%;
 	-webkit-animation: out-left 300ms ease 0ms 1 forwards;

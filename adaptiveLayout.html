@@ -101,7 +101,7 @@
 	</div>
 	<div class="levitate"></div>
 	<div class="banner-bottom">
-		<div class="click-area"></div>
+		<div class="click-area" title="返回顶部"></div>
 	</div>
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcdn.net/ajax/libs/qs/6.9.3/qs.min.js"></script>
@@ -112,7 +112,6 @@
 	<script src="js/OrbitControls.js"></script>
 	<script src="js/lrh.js"></script>
 	<script src="js/api.js"></script>
-	<script src="js/rotate.js"></script>
 	<script>
 		(function () {
 			let canvas = document.querySelector(".box5");
@@ -361,8 +360,9 @@
 
 		let time = new LRH.TimeHandle();
 		console.log(time.sendMessageTime(new Date))
+		let rotate = new LRH.Rotate3D(".scene>div");
 
-
+		
 		let test = new LRH.PressEvent(".box2");
 		test.onlyClick = function () {
 			$(".box1").html("单击")
@@ -440,7 +440,7 @@
 		console.log(error)
 	})
 
-	http.updateUser("/api/v1/update",{id:1,name:"akh33",passwd:"79822"}).then(res => {
+	http.updateUser("/api/v1/update", { id: 1, name: "akh33", passwd: "79822" }).then(res => {
 		console.log(res.data)
 	}).catch(error => {
 		console.log(error)
