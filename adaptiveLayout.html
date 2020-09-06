@@ -434,18 +434,18 @@
 	if (isBase64) data = atob(data); //用于解码使用base-64编码的字符串  //base-64编码使用方法是 btoa()   
 	//		console.log(JSON.stringify(data))
 
-	http.addUser("/api/v1/add", { name: "ceshi", passwd: "123456" }).then(res => {
+	http.addUser( { name: "ceshi", passwd: "123456" }).then(res => {
 		console.log(res.data)
 	}).catch(error => {
 		console.log(error)
 	})
 
-	http.updateUser("/api/v1/update", { id: 1, name: "akh33", passwd: "79822" }).then(res => {
+	http.updateUser( { id: 1, name: "akh33", passwd: "79822" }).then(res => {
 		console.log(res.data)
 	}).catch(error => {
 		console.log(error)
 	})
-	http.getUserList("/api/v1/find").then(res => {
+	http.getUserList().then(res => {
 		console.log(res.data)
 	}).catch(error => {
 		console.log(error)

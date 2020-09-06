@@ -29,24 +29,24 @@ server.interceptors.response.use(function (response) {
 })
 
 const http = {
-  addUser: function (url, data) {
+  addUser: function ( data) {
     return server({
       method: 'post',
-      url: url,
+      url: "/api/v1/add",
       data: data 
     })
   },
-  updateUser: function (url, data) {
+  updateUser: function ( data) {
     return server({
       method: 'post', 
-      url: url,
+      url: "/api/v1/update",
       data: data 
     })
   },
-  getUserList: function (url, data) {
+  getUserList: function ( data) {
     return server({
       method: 'get',
-      url: url,
+      url: "/api/v1/find",
       params: data
     })
   }
